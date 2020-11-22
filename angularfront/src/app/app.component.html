@@ -1,0 +1,156 @@
+<h2 class="text-center">Stack Exchange Advance Search</h2>
+<div class="container">
+  <div class='jumbotron'>
+    <form #formFilter='ngForm' (ngSubmit)='submit(formFilter.value)'> 
+      <div class='row'> 
+        <div class="col">
+          <label>page</label><br/>
+          <input type="number" name="page" ngModel/><br/>
+        </div>
+        <div class="col">
+          <label>pagesize</label><br/>
+          <input type="number" name="pagesize" ngModel/><br/>
+        </div>
+        <div class="col">
+          <label>fromdate</label><br/>
+          <input type="date" name="fromdate" ngModel/><br/>
+        </div>
+        <div class="col">
+          <label>todate</label><br/>
+          <input type="date" name="todate" ngModel/><br/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label>order</label><br/>
+          <select name="order" ngModel>
+            <option value="desc">desc</option>
+            <option value="asc">asc</option>
+          </select><br/>
+        </div>
+        <div class="col">
+          <label>min</label><br/>
+          <input type="date" name="min" ngModel/><br/>
+        </div>
+        <div class="col">
+          <label>max</label><br/>
+          <input type="date" name="max" ngModel/><br/>
+        </div>
+        <div class="col">
+          <label>sort</label><br/>
+          <select name="sort" ngModel>
+            <option value="activity">activity</option>
+            <option value="votes">votes</option>
+            <option value="creation">creation</option>
+            <option value="relevance">relevance</option>
+          </select><br/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label>q</label><br/>
+          <input type="text" name="q" ngModel/><br/>
+        </div>
+        <div class="col">
+          <label>accepted</label><br/>
+          <select name="accepted" ngModel>
+            <option value="">---</option>
+            <option value="True">True</option>
+            <option value="False">False</option>
+          </select><br/>
+        </div>
+        <div class="col">
+          <label>answers</label><br/>
+          <input type="number" name="answers" ngModel/><br/>
+        </div>
+        <div class="col">
+          <label>body</label><br/>
+          <input type="text" name="body" ngModel/><br/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label>closed</label><br/>
+          <select name="closed" ngModel>
+            <option value="">---</option>
+            <option value="True">True</option>
+            <option value="False">False</option>
+          </select><br/>
+        </div>
+        <div class="col">
+          <label>migrated</label><br/>
+          <select name="migrated" ngModel>
+            <option value="">---</option>
+            <option value="True">True</option>
+            <option value="False">False</option>
+          </select><br/>
+        </div>
+        <div class="col">
+          <label>notice</label><br/>
+          <select name="notice" ngModel>
+            <option value="">---</option>
+            <option value="True">True</option>
+            <option value="False">False</option>
+          </select><br/>
+        </div>
+        <div class="col">
+          <label>nottagged</label><br/>
+          <input type="text" name="nottagged" ngModel/><br/> 
+        </div>  
+        <div class="col">
+          <label>tagged</label><br/>
+          <input type="text" name="tagged"  ngModel/><br/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label>title</label><br/>
+          <input type="text" name="title"  ngModel/><br/>
+        </div>
+        <div class="col">
+          <label>user</label><br/>
+          <input type="number" name="user" ngModel/><br/>
+        </div>
+        <div class="col">
+          <label>url</label><br/>
+          <input type="text" name="url"  ngModel/><br/>
+        </div>
+        <div class="col">
+          <label>views</label><br/>
+          <input type="number" name="views"  ngModel/><br/>
+        </div>
+        <div class="col">
+          <label>wiki</label><br/>
+          <select name="wiki" ngModel>
+            <option value="">---</option>
+            <option value="True">True</option>
+            <option value="False">False</option>
+          </select><br/><br/>
+        </div>
+      </div>
+      <button type="button" (click)="submit(formFilter.value)"  class="btn btn-primary button">Search</button>
+    </form>
+  </div>
+</div>
+
+<h2 class="text-center">Result</h2>
+<div class="container">
+  <div class="jumbotron">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+          <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+          <td mat-cell *matCellDef="let element" (click)="openurl(element)"> {{element[column]}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      
+    </div>
+    <mat-paginator [length]="100"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
+<ngx-spinner></ngx-spinner>
+  </div>
+</div>
