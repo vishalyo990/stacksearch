@@ -1,5 +1,6 @@
 .DS_Store
 client/node_modules
+angularfront/node_modules
 client/e2e
 client/bootstrap-overview
 
