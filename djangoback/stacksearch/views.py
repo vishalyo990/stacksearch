@@ -21,8 +21,8 @@ class StackSearchAPI(APIView):
 
         return Response({'message': 'Advansearch API', 'an_apiview': an_view})
 
-    # @ratelimit(key='user_or_ip', rate='5/m')
-    # @ratelimit(key='user_or_ip', rate='100/d')
+    @ratelimit(key='user_or_ip', rate='5/m')
+    @ratelimit(key='user_or_ip', rate='100/d')
     def post(self, request, format=None):
         page = request.data["page"]
         pagesize = request.data["pagesize"]
